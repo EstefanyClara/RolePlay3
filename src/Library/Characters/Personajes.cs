@@ -1,23 +1,20 @@
-using System.Collections.Generic;
+using System.Collections.Generic; 
+
 namespace RoleplayGame
 {
-    public class Archer: ICharacter
+    public abstract class Character: ICharacter
     {
-        private int health = 100;
+        private int health = 100; 
 
-        private List<IItem> items = new List<IItem>();
-
-        public Archer(string name)
-        {
-            this.Name = name;
-            
-            this.AddItem(new Bow());
-            this.AddItem(new Helmet());
-        }
-
-        public string Name { get; set; }
+        protected List<IItem> items =new List<IItem>(); 
         
-        public int AttackValue
+        protected Character(string name)
+        {
+            this.Name=name; 
+        }
+        public string Name {get; set; }
+
+        public virtual int AttackValue
         {
             get
             {
@@ -32,8 +29,7 @@ namespace RoleplayGame
                 return value;
             }
         }
-
-        public int DefenseValue
+        public virtual int DefenseValue
         {
             get
             {
@@ -48,7 +44,6 @@ namespace RoleplayGame
                 return value;
             }
         }
-
         public int Health
         {
             get
@@ -60,7 +55,6 @@ namespace RoleplayGame
                 this.health = value < 0 ? 0 : value;
             }
         }
-
         public void ReceiveAttack(int power)
         {
             if (this.DefenseValue < power)
